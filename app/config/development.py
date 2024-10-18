@@ -7,3 +7,4 @@ class DevelopmentConfig(Config):
     MINIO_URL = 'TBD'
     MINIO_ACCESS_KEY = 'TBD'
     MINIO_SECRET_KEY = 'TBD'
+    SECRET_KEY = 'TBD'
