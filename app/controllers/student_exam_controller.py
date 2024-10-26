@@ -12,8 +12,8 @@ def get_student_exams(student_id):
         student_exam = db.session.execute(db.select(StudentExams).filter_by(student_id=student_id)).scalars()
         student = db.get_or_404(Students, student_id)
         student_data = {
-            'id': student.id,
-            'name': student.name
+            'id': student.id_estudiante,
+            'name': student.primer_nombre
         }
         all_student_exams = []
         for exam in student_exam:
