@@ -47,7 +47,7 @@ def post_exam():
         return jsonify({'message': f'Exam {new_exam.id} created'}), 201
     except Exception as error:
         print(error)
-        return jsonify({'message': 'internal error'}), 500
+        return jsonify({'message': 'internal error'})
     pass
 
 @exams_bp.route('/<exam_id>', methods=['PATCH'])
@@ -55,19 +55,23 @@ def patch_exam(exam_id):
     try:
         data = request.get_json()
         exam = db.get_or_404(Exams, exam_id)
-        if (data.name != exam.name):
-            exam.name = data.name
-        if (data.description != exam.description):
-            exam.description = data.description
-        if (data.time_start != exam.time_start):
-            exam.time_start = data.time_start
-        if (data.time_end != exam.time_end):
-            exam.time_end = data.time_end
+        name = data.get('name')
+        description = data.get('description')
+        time_start = data.get('time_start')
+        time_end = data.get('time_end')
+        if (name != exam.name):
+            exam.name = name
+        if (description != exam.description):
+            exam.description = description
+        if (time_start != exam.time_start):
+            exam.time_start = time_start
+        if (time_end != exam.time_end):
+            exam.time_end = time_end
         db.session.commit()
         return jsonify({'message': f'exam id:{exam_id} patched'})
     except Exception as error:
         print(error)
-        return jsonify({'message': 'internal error'}), 500
+        return jsonify({'message': 'internal error'})
     pass
 
 @exams_bp.route('<exam_id>', methods=['GET'])
@@ -105,7 +109,7 @@ def get_exam_questions(exam_id):
         return jsonify({'exam': exam_data,'questions': all_questions}), 200
     except Exception as error:
         print(error)
-        return jsonify({'message': f'internal error {error}'}), 404
+        return jsonify({'message': f'internal error {error}'})
     pass
 
 @exams_bp.route('/<exam_id>', methods=['DELETE'])
@@ -117,5 +121,5 @@ def delete_exam(exam_id):
         return jsonify({'message': f'exam {exam_id} deleted'}), 200
     except Exception as error:
         print(error)
-        return jsonify({'message': 'internal error'}), 500
+        return jsonify({'message': 'internal error'})
     pass
