@@ -5,6 +5,7 @@ from app.controllers.exams_controller import exams_bp  # Import blueprints
 from app.controllers.questions_controller import questions_bp
 from app.controllers.files_controller import files_bp
 from app.controllers.student_exam_controller import student_exam_bp
+from app.controllers.student_answers_controller import answer_student_bp
 
 def create_app(config_class=DevelopmentConfig):
     """Create and configure the Flask app."""
@@ -19,6 +20,7 @@ def create_app(config_class=DevelopmentConfig):
     app.register_blueprint(questions_bp, url_prefix='/questions')
     app.register_blueprint(files_bp, url_prefix='/files')
     app.register_blueprint(student_exam_bp, url_prefix='/student/exams')
+    app.register_blueprint(answer_student_bp, url_prefix='/student/answer')
 
     @app.route('/')
     def index():
