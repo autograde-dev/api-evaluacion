@@ -1,7 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_minio import Minio
-from keycloak.extensions.flask import Client
+from keycloak import keycloak_openid
+import os
 
 db = SQLAlchemy()
-minio = Minio()
-kcclient = Client()
+kcoi = keycloak_openid
