@@ -1,8 +1,8 @@
 from flask import Flask
 from app.config.development import DevelopmentConfig  # Import configuration
-from app.extensions import db, minio#, kcclient  # Import extensions
-#from app.blueprints.auth import auth_bp  # Import blueprints
-#from app.blueprints.product import product_bp
+from app.extensions import db
+from app.controllers.exams_controller import exams_bp  # Import blueprints
+from app.controllers.questions_controller import questions_bp
 
 def create_app(config_class=DevelopmentConfig):
     """Create and configure the Flask app."""
@@ -11,11 +11,10 @@ def create_app(config_class=DevelopmentConfig):
 
     # Initialize Flask extensions
     db.init_app(app)
-    minio.init_app(app)
-    #kcclient.pat()
 
     # Register blueprints
-    #app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(exams_bp, url_prefix='/exams')
+    app.register_blueprint(questions_bp, url_prefix='/questions')
 
     @app.route('/')
     def index():
